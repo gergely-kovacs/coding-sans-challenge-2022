@@ -6,7 +6,7 @@ use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 
-use challenges::{challenge_one, challenge_two};
+use challenges::{challenge_one, challenge_three, challenge_two};
 use types::BakeryData;
 
 fn read_data_from_json() -> serde_json::Result<BakeryData> {
@@ -23,4 +23,5 @@ fn main() {
     let input_data = read_data_from_json().unwrap();
     challenge_one::solve_challenge_one(&input_data);
     challenge_two::solve_challenge_two(&input_data);
+    challenge_three::solve_challenge_three(&input_data);
 }
