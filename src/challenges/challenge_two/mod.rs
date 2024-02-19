@@ -17,24 +17,48 @@
 */
 
 use crate::answer_writer::write_answer_to_json;
-use crate::types::{BakeryData, MenuWithAllergens, Recipe};
+use crate::types::{BakeryData, MenuEntry, MenuWithAllergens, Recipe};
 
 fn create_menu_with_allergens(recipes: &[Recipe]) -> MenuWithAllergens {
     MenuWithAllergens {
         gluten_free: recipes
             .iter()
-            .filter(|recipe| recipe.gluten_free && !recipe.lactose_free)
-            .cloned()
+            .filter_map(|recipe| {
+                if recipe.gluten_free && !recipe.lactose_free {
+                    Some(MenuEntry {
+                        name: recipe.name.clone(),
+                        price: recipe.price.clone(),
+                    })
+                } else {
+                    None
+                }
+            })
             .collect(),
         lactose_free: recipes
             .iter()
-            .filter(|recipe| recipe.lactose_free && !recipe.gluten_free)
-            .cloned()
+            .filter_map(|recipe| {
+                if recipe.lactose_free && !recipe.gluten_free {
+                    Some(MenuEntry {
+                        name: recipe.name.clone(),
+                        price: recipe.price.clone(),
+                    })
+                } else {
+                    None
+                }
+            })
             .collect(),
         both: recipes
             .iter()
-            .filter(|recipe| recipe.gluten_free && recipe.lactose_free)
-            .cloned()
+            .filter_map(|recipe| {
+                if recipe.gluten_free && recipe.lactose_free {
+                    Some(MenuEntry {
+                        name: recipe.name.clone(),
+                        price: recipe.price.clone(),
+                    })
+                } else {
+                    None
+                }
+            })
             .collect(),
     }
 }

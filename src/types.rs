@@ -45,9 +45,15 @@ pub struct BakeryData {
 }
 
 #[derive(Deserialize, Serialize)]
+pub struct MenuEntry {
+    pub name: String,
+    pub price: String,
+}
+
+#[derive(Deserialize, Serialize)]
 #[serde(rename_all(serialize = "snake_case", deserialize = "camelCase"))]
 pub struct MenuWithAllergens {
-    pub gluten_free: Vec<Recipe>,
-    pub lactose_free: Vec<Recipe>,
-    pub both: Vec<Recipe>,
+    pub gluten_free: Vec<MenuEntry>,
+    pub lactose_free: Vec<MenuEntry>,
+    pub both: Vec<MenuEntry>,
 }
