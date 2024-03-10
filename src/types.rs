@@ -57,3 +57,10 @@ pub struct MenuWithAllergens {
     pub lactose_free: Vec<MenuEntry>,
     pub both: Vec<MenuEntry>,
 }
+
+#[derive(Deserialize, Serialize)]
+#[serde(rename_all(serialize = "snake_case", deserialize = "camelCase"))]
+pub struct MaxAmountFromInventory {
+    pub name: String,
+    pub amount: usize,
+}
